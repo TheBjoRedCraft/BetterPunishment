@@ -1,0 +1,4 @@
+name: BetterPunishment
+version: '${version}'
+main: dev.thebjoredcraft.betterpunishment.BetterPunishment
+api-version: '1.20'
