@@ -2,3 +2,10 @@ name: BetterPunishment
 version: '${version}'
 main: dev.thebjoredcraft.betterpunishment.BetterPunishment
 api-version: '1.20'
+commands:
+  betterpunishment:
+    permission: bp.cmd.betterpunishment
+  kick:
+    permission: bp.cmd.kick
+  ban:
+    permission: bp.cmd.ban
