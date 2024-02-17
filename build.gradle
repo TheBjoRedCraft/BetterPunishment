@@ -5,6 +5,9 @@ plugins {
 group = 'dev.thebjoredcraft'
 version = '1.0-BUKKIT'
 
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
 repositories {
     mavenCentral()
     maven {
@@ -29,6 +32,8 @@ java {
     if (JavaVersion.current() < javaVersion) {
         toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
     }
+    withSourcesJar()
+    withJavadocJar()
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -46,4 +51,15 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+wrapper {
+    gradleVersion = "7.3.3"
+    distributionType = Wrapper.DistributionType.ALL
 }
