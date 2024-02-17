@@ -1,9 +1,12 @@
-package dev.thebjoredcraft.betterpunishment;
+package dev.thebjoredcraft.betterpunishment.punishment;
 
+import dev.thebjoredcraft.betterpunishment.BetterPunishment;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +16,8 @@ import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 
-public class BetterPunishmentManager {
+public class PunishmentManager {
+    public static NamespacedKey warmKey = new NamespacedKey(BetterPunishment.INSTANCE, "warns");
     public static void ban(Player player, Player banner, Duration duration, String reason){
         long durationMillis = duration.toMillis();
 
@@ -66,5 +70,9 @@ public class BetterPunishmentManager {
         BetterPunishment.INSTANCE.saveConfig();
 
         player.kick(MiniMessage.miniMessage().deserialize(reason));
+    }
+    public static void warn(Player player, Player warner){
+
+        player.getPersistentDataContainer().set(warmKey, PersistentDataType.INTEGER, 1);
     }
 }

@@ -1,6 +1,6 @@
 package dev.thebjoredcraft.betterpunishment.command;
 
-import dev.thebjoredcraft.betterpunishment.BetterPunishmentManager;
+import dev.thebjoredcraft.betterpunishment.punishment.PunishmentManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -21,7 +21,7 @@ public class PlayerKickCommand implements CommandExecutor {
                     for (int i = 1; i < args.length; i++) {
                         reason = reason + args[i] + " ";
                     }
-                    BetterPunishmentManager.kick(target, player, reason);
+                    PunishmentManager.kick(target, player, reason);
                 }else{
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red>The player was not found!"));
                 }

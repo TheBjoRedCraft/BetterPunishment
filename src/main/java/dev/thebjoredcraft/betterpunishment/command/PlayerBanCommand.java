@@ -1,6 +1,7 @@
 package dev.thebjoredcraft.betterpunishment.command;
 
-import dev.thebjoredcraft.betterpunishment.BetterPunishmentManager;
+import dev.thebjoredcraft.betterpunishment.punishment.Punishment;
+import dev.thebjoredcraft.betterpunishment.punishment.PunishmentType;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -20,12 +21,12 @@ public class PlayerBanCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target != null) {
                     Duration duration = Duration.ofSeconds(Long.parseLong(args[1]));
-                    String reason = "";
+                    StringBuilder reason = new StringBuilder();
 
                     for (int i = 2; i < args.length; i++) {
-                        reason = reason + args[i] + " ";
+                        reason.append(args[i]).append(" ");
                     }
-                    BetterPunishmentManager.ban(target, player, duration, reason);
+                    new Punishment(target, player, PunishmentType.BAN, reason.toString(), duration, false);
                 }else{
                     player.sendMessage(MiniMessage.miniMessage().deserialize("<red>The player was not found!"));
                 }
